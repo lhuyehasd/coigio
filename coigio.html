@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đếm ngược đến giờ phát biểu của Jerome Powell</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding-top: 100px;
+    }
+    h1 {
+      font-size: 2.5rem;
+    }
+    #countdown {
+      font-size: 3rem;
+      margin: 30px 0;
+    }
+    #fireworks {
+      display: none;
+      font-size: 2rem;
+      color: yellow;
+    }
+    #livestream {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+    a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>⏳ Đếm ngược đến giờ phát biểu của Chủ tịch Fed Jerome Powell</h1>
+  <div id="countdown"></div>
+  <div id="fireworks">🎆🎇 Phát biểu bắt đầu! 🎆🎇</div>
+  <div id="livestream">
+    📺 Xem trực tiếp tại đây: <a href="https://www.youtube.com/c/WhiteHouse" target="_blank">YouTube - Kênh Nhà Trắng</a>
+  </div>
+
+  <script>
+    const countdown = document.getElementById('countdown');
+    const fireworks = document.getElementById('fireworks');
+    const livestream = document.getElementById('livestream');
+
+    // Thời gian mục tiêu: 00:30 ngày 17/04/2025 theo giờ Việt Nam
+    const targetTime = new Date('2025-04-17T00:30:00+07:00').getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = targetTime - now;
+
+      if (distance <= 0) {
+        countdown.style.display = 'none';
+        fireworks.style.display = 'block';
+        livestream.style.display = 'block';
+        clearInterval(timer);
+      } else {
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        countdown.innerHTML = `${hours} giờ ${minutes} phút ${seconds} giây`;
+      }
+    };
+
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
